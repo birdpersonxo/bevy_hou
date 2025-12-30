@@ -2,5 +2,11 @@
 name = "bevy_hou"
 version = "0.1.0"
 edition = "2024"
+description = "Houdini ↔ Bevy integration plugin"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/birdpersonxo/bevy_hou"
+readme = "README.md"
 
 [dependencies]
+bevy = { version = "0.13", default-features = false }
+serde = { version = "1.0", features = ["derive"] }
