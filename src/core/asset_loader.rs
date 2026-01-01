@@ -1,4 +1,4 @@
-use crate::platform::HouPlatformData;
+use crate::component::file::HouData;
 use bevy::{
     asset::{AssetLoader, LoadContext, io::Reader},
     prelude::*,
@@ -8,7 +8,7 @@ use thiserror::Error;
 /// Possible errors that can be produced by [`CustomAssetLoader`]
 #[non_exhaustive]
 #[derive(Debug, Error)]
-pub enum HouPlatformAssetLoaderError {
+pub enum HouAssetLoaderError {
     /// An [IO](std::io) Error
     #[error("Could not load asset: {0}")]
     Io(#[from] std::io::Error),
@@ -19,12 +19,12 @@ pub enum HouPlatformAssetLoaderError {
 }
 
 #[derive(Default)]
-pub struct HouPlatformAssetLoader;
+pub struct HouAssetLoader;
 
-impl AssetLoader for HouPlatformAssetLoader {
-    type Asset = HouPlatformData;
+impl AssetLoader for HouAssetLoader {
+    type Asset = HouData;
     type Settings = ();
-    type Error = HouPlatformAssetLoaderError;
+    type Error = HouAssetLoaderError;
 
     async fn load(
         &self,
@@ -34,7 +34,7 @@ impl AssetLoader for HouPlatformAssetLoader {
     ) -> Result<Self::Asset, Self::Error> {
         let mut bytes = Vec::new();
         reader.read_to_end(&mut bytes).await?;
-        let custom_asset = serde_json::from_slice::<HouPlatformData>(&bytes)?;
+        let custom_asset = serde_json::from_slice::<HouData>(&bytes)?;
         Ok(custom_asset)
     }
 
