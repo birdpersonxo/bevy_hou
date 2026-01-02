@@ -10,21 +10,13 @@ pub struct HouRect {
     pub uv: Vec<Vec2>,
 }
 
-impl Primitive2d for HouRect {}
-
-impl Default for HouRect {
-    fn default() -> Self {
-        Self {
-            size: Vec2::splat(0.5),
-            translation: Vec3::splat(0.),
-            uv: Vec::new(),
-        }
+impl HouRect {
+    pub fn get_halfsize(&self) -> Vec2 {
+        self.size * 0.5
     }
-}
 
-impl MeshBuilder for HouRect {
-    fn build(&self) -> Mesh {
-        let half_size = self.size * 0.5;
+    pub fn get_vertices(&self) -> Vec<Vec3> {
+        let half_size = self.get_halfsize();
 
         let vertices: Vec<Vec3> = vec![
             // Vertex 0: Top-left (matches UV[0])
@@ -53,8 +45,10 @@ impl MeshBuilder for HouRect {
             ),
         ];
 
-        // Create UV coordinates - invert Y coordinate (1.0 - y)
-        // Houdini typically uses bottom-left as (0,0), Bevy uses top-left as (0,0)
+        return vertices;
+    }
+
+    pub fn get_uvs(&self) -> Vec<Vec2> {
         let uvs = if self.uv.is_empty() {
             vec![
                 Vec2::new(0.0, 0.0), // Top-left becomes (0,0) after Y inversion
@@ -73,8 +67,31 @@ impl MeshBuilder for HouRect {
             ]
         };
 
-        // Create indices
-        let indices = vec![0, 1, 2, 2, 3, 0];
+        return uvs;
+    }
+
+    pub fn get_indices(&self) -> Vec<u32> {
+        return vec![0, 1, 2, 2, 3, 0];
+    }
+}
+
+impl Primitive2d for HouRect {}
+
+impl Default for HouRect {
+    fn default() -> Self {
+        Self {
+            size: Vec2::splat(0.5),
+            translation: Vec3::splat(0.),
+            uv: Vec::new(),
+        }
+    }
+}
+
+impl MeshBuilder for HouRect {
+    fn build(&self) -> Mesh {
+        let vertices = self.get_vertices();
+        let uvs = self.get_uvs();
+        let indices = self.get_indices();
 
         // Create normals (all pointing forward for a 2D rectangle)
         let normals: Vec<Vec3> = vec![
