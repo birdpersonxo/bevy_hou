@@ -7,7 +7,7 @@ license = "MIT"
 repository = "https://github.com/birdpersonxo/bevy_hou"
 homepage = "https://github.com/birdpersonxo/bevy_hou"
 readme = "README.md"
-keywords = ["bevy", "gltf", "houdini", "assets", "platformer", "usd"]
+keywords = ["bevy", "gltf", "houdini", "usd"]
 categories = ["game-engines", "graphics", "development-tools"]
 authors = ["Deepak Rajan <birdperson.me@gmail.com>"]
 
