@@ -7,7 +7,7 @@ use crate::mesh2d::HouRect;
 
 #[derive(Serialize, Debug, Deserialize)]
 pub struct HouLayer {
-    pub mesh2d: Option<Vec<HouRect>>,
+    pub rect: Option<Vec<HouRect>>,
 }
 
 #[derive(Serialize, Debug, Deserialize, Asset, TypePath, Resource)]

@@ -2,7 +2,7 @@
 name = "bevy_hou"
 version = "0.1.0"
 edition = "2024"
-description = "Houdini ↔ Bevy integration plugin"
+description = "Bevy ↔ Houdini integration plugin"
 license = "MIT"
 repository = "https://github.com/birdpersonxo/bevy_hou"
 homepage = "https://github.com/birdpersonxo/bevy_hou"
